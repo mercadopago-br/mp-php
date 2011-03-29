@@ -1,6 +1,6 @@
 ﻿<?php
 
-require_once("../src/mercadopago.php");
+require_once("../src/mercadopago/mpago.php");
 
 
 
