@@ -50,7 +50,7 @@ $mp->setItem(array(
     'price' => '12.67'
 ));
 
-echo $mp->showButton();
+echo $mp->showButton(0,null);
 
 
 ?>
