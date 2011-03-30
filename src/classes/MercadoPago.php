@@ -54,12 +54,14 @@ class MercadoPago {
         $this->all = $this->config + $this->item + $this->client;
     }
 
-    public function showButton(){
+    public function showButton($safe = false, $img = null){
 
         $this->getAllParams();
 
+        if (is_null($img)) $img = "https://www.mercadopago.com/org-img/MP3/buy_now_07_mlb.gif";
+
         $html  = '<form target="_top" action="https://www.mercadopago.com/mlb/buybutton" method="post">';
-        $html .= '  <input type="image" src="https://www.mercadopago.com/org-img/MP3/buy_now_07_mlb.gif" border="0" alt="Comprar Agora">';
+        $html .= '  <input type="image" src="'.$img.'" border="0" alt="Comprar Agora">';
 
         foreach ($this->all as $field => $value) {
             $html .= "  <input type=\"hidden\" name=\"$field\" value=\"$value\">\n";
