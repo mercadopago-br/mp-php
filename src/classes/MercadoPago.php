@@ -42,6 +42,8 @@ class MercadoPago {
     private $item = array();
     private $all = array();
 
+    private $safe_button = "";
+
     public function  __construct($args = array()) {
         $this->setConfig($args);
     }
@@ -60,11 +62,20 @@ class MercadoPago {
 
         if (is_null($img)) $img = "https://www.mercadopago.com/org-img/MP3/buy_now_07_mlb.gif";
 
-        $html  = '<form target="_top" action="https://www.mercadopago.com/mlb/buybutton" method="post">';
+        if ($safe) {
+            $this->getSafeButton();
+            $url_button = $this->safe_button;
+        } else {
+            $url_button = "https://www.mercadopago.com/mlb/buybutton";
+        }
+
+        $html  = '<form target="_top" action="'.$url_button.'" method="post">';
         $html .= '  <input type="image" src="'.$img.'" border="0" alt="Comprar Agora">';
 
-        foreach ($this->all as $field => $value) {
-            $html .= "  <input type=\"hidden\" name=\"$field\" value=\"$value\">\n";
+        if (!$safe || $this->safe_button == ""){
+            foreach ($this->all as $field => $value) {
+                $html .= "  <input type=\"hidden\" name=\"$field\" value=\"$value\">\n";
+            }
         }
 
         $html .= '</form>';
@@ -82,6 +93,34 @@ class MercadoPago {
 
     private function setConfig( $args = array() ){
         $this->config = $args;
+    }
+
+    private function getSafeButton(){
+
+        $url ="https://www.mercadopago.com/mlb/orderpreference" ;
+
+        $elements = array();
+
+        foreach ($this->all as $name => $value) {
+           $elements[] = "{$name}=".urlencode($value);
+        }
+        
+        $postData = implode ("&", $elements);
+
+        $handler = curl_init();
+
+        curl_setopt($handler, CURLOPT_URL, $url);
+        curl_setopt($handler, CURLOPT_POST, true);
+        curl_setopt($handler, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($handler, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, FALSE);
+
+        $response = curl_exec ($handler);
+
+        curl_close($handler);
+
+        $this->safe_button = $response;
     }
 
 }

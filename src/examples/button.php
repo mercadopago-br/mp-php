@@ -20,8 +20,9 @@
 include("../classes/MercadoPago.php");
 
 $mp = new MercadoPago(array(
-    'acc_id' => 'XXXXXX',
-    'enc' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    'acc_id' => 'XXXXXXX',
+    'enc' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    'token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
     'url_succesfull' => 'http://www.seusite.com/sucesso',
     'url_process' => 'http://www.seusite.com/analise',
     'url_cancel' => 'http://www.seusite.com/cancel',
@@ -34,11 +35,11 @@ $mp->setClient(array(
     'cart_name' => 'Nome',
     'cart_surname' => 'Sobrenome',
     'cart_email' => 'email_do_cliente@seusite.com.br',
-    'cart_cep' => 'XXXXX-XXX',
+    'cart_cep' => '06541-005',
     'cart_street' => 'Avenida Marte',
     'cart_number' => '489',
     'cart_complement' => '',
-    'cart_phone' => '11-XXXXXXXX',
+    'cart_phone' => '11-25435400',
     'cart_district' => 'Alphaville',
     'cart_city' => 'Santana de Parnaíba',
     'cart_state' => 'SP',
@@ -50,7 +51,7 @@ $mp->setItem(array(
     'price' => '12.67'
 ));
 
-echo $mp->showButton(0,null);
+echo $mp->showButton(false, null);
 
 
 ?>
