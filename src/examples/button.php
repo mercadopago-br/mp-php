@@ -28,8 +28,7 @@ $mp = new MercadoPago(array(
     'url_cancel' => 'http://www.seusite.com/cancel',
     'currency' => 'REA',
     'ship_cost_mode' => 'DS',
-    'shipping_cost' => '',
-    'charset' => 'ISO-8859-1'
+    'shipping_cost' => ''
 ));
 
 $mp->setClient(array(
