@@ -1,4 +1,4 @@
-<?php
+<?php header('Content-Type: text/html; charset=ISO-8859-1');
 /**
  *  MercadoPago - PHP
  *  Copyright (C) 2011  MercadoPago Brasil
@@ -20,15 +20,16 @@
 include("../classes/MercadoPago.php");
 
 $mp = new MercadoPago(array(
-    'acc_id' => 'XXXXXXX',
-    'enc' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-    'token' => 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    'acc_id' => 'XXXXXXXXXXX',
+    'enc' => 'XXXXXXXXXXXXXXXXXXXXXXXXXX',
+    'token' => 'XXXXXXXXXXXXXXXXXXXXXXX',
     'url_succesfull' => 'http://www.seusite.com/sucesso',
     'url_process' => 'http://www.seusite.com/analise',
     'url_cancel' => 'http://www.seusite.com/cancel',
     'currency' => 'REA',
     'ship_cost_mode' => 'DS',
-    'shipping_cost' => ''
+    'shipping_cost' => '',
+    'charset' => 'ISO-8859-1'
 ));
 
 $mp->setClient(array(
@@ -41,7 +42,7 @@ $mp->setClient(array(
     'cart_complement' => '',
     'cart_phone' => '11-25435400',
     'cart_district' => 'Alphaville',
-    'cart_city' => 'Santana de ParnaÃ­ba',
+    'cart_city' => 'Santana de Parnaíba',
     'cart_state' => 'SP',
 ));
 
